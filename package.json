@@ -24,6 +24,8 @@
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "axios": "^0.26.0",
+    "fast-xml-parser": "^4.0.4",
     "hbs": "^4.2.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
