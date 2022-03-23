@@ -19,12 +19,12 @@ app.get("/", (req: express.Request, res: express.Response) => {
 app.get("/feed", async (req: Express.Request, res: express.Response) => {
   const rawFeed = await axios("http://www.reddit.com/.rss");
   const feed = parser.parse(rawFeed.data);
-  console.log(feed.feed.entry[0]);
-  // res.send(JSON.stringify(feed));
+  // console.log(feed.feed.entry[0]);
   res.render("feed", {
-    title: feed.feed.entry[0].title,
-    content: feed.feed.entry[0].content,
+    entries: feed.feed.entry,
   });
 });
 
-app.listen(5001, () => console.log("Server running"));
+const PORT = process.env.APP_PORT ?? 5001;
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
