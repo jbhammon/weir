@@ -3,6 +3,7 @@ import { XMLParser } from "fast-xml-parser";
 import axios from "axios";
 import path from "path";
 import { create } from "express-handlebars";
+import { parse } from "node-html-parser";
 
 const app: express.Application = express();
 const hbs = create({});
@@ -18,10 +19,22 @@ app.get("/", (req: express.Request, res: express.Response) => {
 
 app.get("/feed", async (req: Express.Request, res: express.Response) => {
   const rawFeed = await axios("http://www.reddit.com/.rss");
+  console.log(rawFeed.data);
   const feed = parser.parse(rawFeed.data);
-  // console.log(feed.feed.entry[0]);
+  const parsedFeed = feed.feed.entry.map((entry: any) => {
+    const root = parse(entry.content);
+    console.log("================");
+    console.log(root.toString());
+    console.log("================");
+    // if a post has an image, there's a table
+    // otherwise, there is just some divs and spans
+    return {
+      title: entry.title,
+      content: root,
+    };
+  });
   res.render("feed", {
-    entries: feed.feed.entry,
+    entries: parsedFeed,
   });
 });
 
