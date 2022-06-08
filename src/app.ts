@@ -2,13 +2,12 @@ import express from "express";
 import { XMLParser } from "fast-xml-parser";
 import axios from "axios";
 import path from "path";
-import { create } from "express-handlebars";
+import { engine } from "express-handlebars";
 import { parse } from "node-html-parser";
 
 const app: express.Application = express();
-const hbs = create({});
-app.engine("handlebars", hbs.engine);
-app.set("view engine", "handlebars");
+app.engine(".hbs", engine({ extname: ".hbs" }));
+app.set("view engine", ".hbs");
 app.set("views", path.join(__dirname, "views"));
 
 const parser = new XMLParser();
