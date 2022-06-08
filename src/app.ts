@@ -39,6 +39,16 @@ app.get(
   },
 );
 
+app.get("/nytimes", async (req: express.Request, res: express.Response) => {
+  const rawFeed = await axios(
+    "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
+  );
+  console.log(rawFeed.data);
+  const feed = parser.parse(rawFeed.data);
+  console.log(feed);
+  res.render("nytimes");
+});
+
 const PORT = process.env.APP_PORT ?? 5001;
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
