@@ -17,26 +17,28 @@ app.get("/", (req: express.Request, res: express.Response) => {
   res.render("home");
 });
 
-app.get("/feed", async (req: Express.Request, res: express.Response) => {
-  const rawFeed = await axios("http://www.reddit.com/.rss");
-  console.log(rawFeed.data);
-  const feed = parser.parse(rawFeed.data);
-  const parsedFeed = feed.feed.entry.map((entry: any) => {
-    const root = parse(entry.content);
-    console.log("================");
-    console.log(root.toString());
-    console.log("================");
-    // if a post has an image, there's a table
-    // otherwise, there is just some divs and spans
-    return {
-      title: entry.title,
-      content: root,
-    };
-  });
-  res.render("feed", {
-    entries: parsedFeed,
-  });
+app.get("/reddit", (req: express.Request, res: express.Response) => {
+  res.render("reddit");
 });
+
+app.get(
+  "/reddit/:subreddit",
+  async (req: express.Request, res: express.Response) => {
+    const { subreddit } = req.params;
+    const rawFeed = await axios(`http://www.reddit.com/r/${subreddit}/.rss`);
+    const feed = parser.parse(rawFeed.data);
+    const parsedFeed = feed.feed.entry.map((entry: any) => {
+      const root = parse(entry.content);
+      return {
+        title: entry.title,
+        content: root,
+      };
+    });
+    res.render("feed", {
+      entries: parsedFeed,
+    });
+  },
+);
 
 const PORT = process.env.APP_PORT ?? 5001;
 
