@@ -1,1 +1,11 @@
 <h1>Welcome to Weir</h1>
+{{#each config}}
+  <h2>{{label}}</h2>
+  <ul>
+  {{#each feeds}}
+    <li>
+      <a href={{pageUrl}}>{{label}}</a>
+    </li>
+  {{/each}}
+  </ul>
+{{/each}}
