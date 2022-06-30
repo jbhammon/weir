@@ -1,0 +1,9 @@
+* {
+  font-family: Helvetica, Arial, sans-serif;
+  color: #313131;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
