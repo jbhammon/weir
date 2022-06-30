@@ -26,4 +26,21 @@ export const config: FeedSection[] = [
       },
     ],
   },
+  {
+    label: "YouTube",
+    feeds: [
+      {
+        label: "Dunkey",
+        feedUrl:
+          "https://www.youtube.com/feeds/videos.xml?channel_id=UCsvn_Po0SmunchJYOWpOxMg",
+        pageUrl: "/yt/dunkey",
+      },
+      {
+        label: "Dessert Person",
+        feedUrl:
+          "https://www.youtube.com/feeds/videos.xml?channel_id=UCvw6Y1kr_8bp6B5m1dqNyiw",
+        pageUrl: "/yt/dessert-person",
+      },
+    ],
+  },
 ];

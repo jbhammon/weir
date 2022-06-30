@@ -18,20 +18,23 @@ app.get("/", (req: express.Request, res: express.Response) => {
   });
 });
 
-app.get("/reddit", (req: express.Request, res: express.Response) => {
-  res.render("reddit");
-});
-
 config.forEach((section) => {
   section.feeds.forEach((feedConfig) => {
     app.get(
       feedConfig.pageUrl,
       async (req: express.Request, res: express.Response) => {
-        const feed = await rssParser.parseURL(feedConfig.feedUrl);
-        res.render("feed", {
-          entries: feed.items,
-          title: feed.title,
-        });
+        try {
+          const feed = await rssParser.parseURL(feedConfig.feedUrl);
+          res.render("feed", {
+            entries: feed.items,
+            title: feed.title,
+          });
+        } catch (error) {
+          console.log(`Error getting ${feedConfig.label} feed: `, error);
+          res.render("error", {
+            title: feedConfig.label,
+          });
+        }
       },
     );
   });
