@@ -4,6 +4,47 @@
 }
 
 .container {
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.stack > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.stack > * + * {
+  margin-top: 1rem;
+}
+.stack.stack--small > * + * {
+  margin-top: 0.5rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 2rem;
+}
+
+.card {
+  box-shadow: 
+    rgba(0, 0, 0, 0.2) 0px 3px 3px -2px, 
+    rgba(0, 0, 0, 0.14) 0px 3px 4px 0px, 
+    rgba(0, 0, 0, 0.12) 0px 1px 8px 0px;
+  border-radius: 0.25rem;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.link-button {
+  background-color: #313131;
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  width: fit-content;
+  border-radius: 0.25rem;
 }

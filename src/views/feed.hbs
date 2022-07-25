@@ -1,7 +1,10 @@
 <h1>{{title}}</h1>
 <p>Internet without the fire hose</p>
-{{#each entries}}
-  <hr>
-  <h3>{{title}}</h3>
-  <a href="{{link}}" target="_blank">{{link}}</a>
-{{/each}}
+<div class="card-grid">
+  {{#each entries}}
+    <div class="card stack stack--small">
+      <h3>{{title}}</h3>
+      <a class="link-button" href="{{link}}" target="_blank">View</a>
+    </div>
+  {{/each}}
+</div>
