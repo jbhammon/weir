@@ -7,7 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/app.js",
     "dev": "nodemon src/app.ts",
-    "build": "tsc -p ."
+    "copy:public": "cp -R ./src/public ./dist/public",
+    "copy:views": "cp -R ./src/views ./dist/views",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p .",
+    "copy": "pnpm copy:public && pnpm copy:views",
+    "build": "pnpm clean && pnpm compile && pnpm copy"
   },
   "repository": {
     "type": "git",
