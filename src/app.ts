@@ -2,10 +2,16 @@ import express from "express";
 import path from "path";
 import { engine } from "express-handlebars";
 import Parser from "rss-parser";
+import helmet from "helmet";
 
 import { config } from "./config";
 
 const app: express.Application = express();
+
+// Basic security measures
+app.use(helmet());
+app.disable("x-powered-by");
+
 app.engine(".hbs", engine({ extname: ".hbs" }));
 app.set("view engine", ".hbs");
 app.set("views", path.join(__dirname, "views"));
